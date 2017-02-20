@@ -1,0 +1,9 @@
+h4 All chatrooms
+= link_to 'New chatroom', new_chatroom_path
+- @chatrooms.each do |chatroom|
+  p
+    b Chatroom 
+    = chatroom.name
+    br/
+    =< link_to 'Edit chatroom', edit_chatroom_path(chatroom)
+    =< link_to 'Delete chatroom', chatroom_path(chatroom), method: :delete, data: {confirm: 'Are you sure?'}
