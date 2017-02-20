@@ -11,10 +11,20 @@ html
       p.alert= alert
       - if current_user
         | User - #{current_user.username}.
+        =< link_to 'Chatrooms', root_path
         =< link_to 'Logout', destroy_user_session_path, method: :delete
         =< link_to 'Edit user', edit_user_registration_path
       - else
         => link_to 'Login', new_user_session_path
         = link_to 'Sign up', new_user_registration_path
       hr/
-      = yield
+      .fluid-container
+        .row
+          .col-sm-2
+            - if current_user
+              h5 Chatrooms
+              ul
+                - current_user.chatrooms.each do |chatroom|
+                  li = link_to chatroom.name, '#'
+          .col-sm-10
+            = yield
