@@ -1,5 +1,5 @@
 h4 = @chatroom.name
-div[data-behavior="messages"]
+div id="#{@chatroom.id}"
   = render @messages
 = simple_form_for [@chatroom, @message], remote: true do |f|
   = f.text_field :text, class: "form-control", id: 'text_field', autofocus: true

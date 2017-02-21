@@ -43,8 +43,9 @@ html
               h5 Chatrooms
               ul
                 - current_user.chatrooms.each do |chatroom|
-                  li
-                    = link_to chatroom.name, chatroom, data: { chatroom_id: chatroom.id }
+                  div id="list-#{chatroom.id}"
+                    li 
+                      = link_to chatroom.name, chatroom 
               = link_to 'New chatroom', new_chatroom_path
           .col-sm-10.col-sm-offset-2
             = yield
