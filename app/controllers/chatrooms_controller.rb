@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ChatroomsController < ApplicationController
   before_action :authenticate_user!
   before_action :set, except: [:index, :new, :create]
@@ -6,20 +7,21 @@ class ChatroomsController < ApplicationController
     @chatrooms = Chatroom.all
   end
 
-  def show 
+  def show
     @chatroom_user = current_user.chatroom_users.find_by(chatroom_id: @chatroom.id)
     @messages = @chatroom.messages.order(created_at: :desc).limit(100).reverse
+    @message = Message.new
   end
 
   def new
     @chatroom = Chatroom.new
   end
 
-  def edit ; end
+  def edit; end
 
   def update
     @chatroom.update_attributes!(chatroom_params)
-    redirect_to '/'    
+    redirect_to '/'
   end
 
   def create
@@ -29,6 +31,7 @@ class ChatroomsController < ApplicationController
 
   def destroy
     @chatroom.chatroom_users.destroy_all
+    @chatroom.messages.destroy_all
     @chatroom.destroy
     redirect_to '/'
   end

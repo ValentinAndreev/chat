@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 class ChatroomUsersController < ApplicationController
   before_action :authenticate_user!
   before_action :set_chatroom
@@ -9,7 +10,7 @@ class ChatroomUsersController < ApplicationController
 
   def destroy
     @chatroom_user = @chatroom.chatroom_users.where(user_id: current_user.id).destroy_all
-    redirect_to '/'  
+    redirect_to '/'
   end
 
   private

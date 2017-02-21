@@ -1,8 +1,9 @@
+# frozen_string_literal: true
 Rails.application.routes.draw do
   devise_for :users
   resources :chatrooms do
     resource :chatroom_users
-    resources :messages    
+    resources :messages
   end
   root 'chatrooms#index'
 end

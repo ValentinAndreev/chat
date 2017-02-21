@@ -44,7 +44,7 @@ html
               ul
                 - current_user.chatrooms.each do |chatroom|
                   li
-                    = link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id}
+                    = link_to chatroom.name, chatroom, data: { chatroom_id: chatroom.id }
               = link_to 'New chatroom', new_chatroom_path
           .col-sm-10.col-sm-offset-2
             = yield
