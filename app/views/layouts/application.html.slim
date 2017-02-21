@@ -9,22 +9,42 @@ html
     .container
       p.notice= notice
       p.alert= alert
-      - if current_user
-        | User - #{current_user.username}.
-        =< link_to 'Chatrooms', root_path
-        =< link_to 'Logout', destroy_user_session_path, method: :delete
-        =< link_to 'Edit user', edit_user_registration_path
-      - else
-        => link_to 'Login', new_user_session_path
-        = link_to 'Sign up', new_user_registration_path
-      hr/
+      nav.navbar.navbar-default.navbar-fixed-top[role="navigation"]
+        button.navbar-toggle.collapsed[type="button" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false"]
+        a.navbar-brand[href=root_path]
+          | Chatrooms 
+        #bs-example-navbar-collapse-1.collapse.navbar-collapse
+          ul.nav.navbar-nav
+            li.active
+          ul.nav.navbar-nav.navbar-right
+            li
+              a[href="#"]
+                | Link
+            li.dropdown
+              - if current_user
+                a.dropdown-toggle[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
+                  = current_user.username
+                  span.caret
+                ul.dropdown-menu
+                  li
+                    = link_to 'Edit user', edit_user_registration_path
+                  li.divider[role="separator"]
+                  li
+                    = link_to 'Logout', destroy_user_session_path, method: :delete
+              - else
+                li
+                  = link_to 'Login', new_user_session_path
+                li
+                  = link_to 'Sign up', new_user_registration_path                             
       .fluid-container
         .row
-          .col-sm-2
-            - if current_user
+          .col-sm-2[style="position: fixed; top: 70px; left: 0;"]
+            - if current_user          
               h5 Chatrooms
               ul
                 - current_user.chatrooms.each do |chatroom|
-                  li = link_to chatroom.name, '#'
-          .col-sm-10
+                  li
+                    = link_to chatroom.name, chatroom, data: {behavior: "chatroom-link", chatroom_id: chatroom.id}
+              = link_to 'New chatroom', new_chatroom_path
+          .col-sm-10.col-sm-offset-2
             = yield

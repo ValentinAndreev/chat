@@ -1,2 +1,11 @@
 h4 = @chatroom.name
-= link_to 'Back', root_path
+div[data-behavior="messages"]
+  - @messages.each do |message|
+      b 
+        = message.user.username
+        | :
+      = message.text
+      br/
+= simple_form_for [@chatroom, Message.new] do |f|
+  = f.text_area :text, rows: 1, class: "form-control", autofocus: true
+= link_to 'Back', root_path  
