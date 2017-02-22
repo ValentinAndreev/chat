@@ -1,4 +1,5 @@
-b = message.user.username
-| :
-=< message.text
-br/
+.well
+  = image_tag(message.user.avatar, height: '40', class: 'img-circle') if message.user.avatar
+  b =< message.user.username
+  | :
+  =< message.text

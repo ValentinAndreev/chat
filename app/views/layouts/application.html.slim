@@ -23,6 +23,7 @@ html
             li.dropdown
               - if current_user
                 a.dropdown-toggle[href="#" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"]
+                  => image_tag(current_user.avatar, height: '40', class: 'img-circle') if current_user.avatar   
                   = current_user.username
                   span.caret
                 ul.dropdown-menu
