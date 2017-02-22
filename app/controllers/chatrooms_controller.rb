@@ -25,7 +25,9 @@ class ChatroomsController < ApplicationController
   end
 
   def create
-    @chatroom = Chatroom.create!(chatroom_params)
+    @chatroom = Chatroom.new(chatroom_params)
+    @chatroom.user_id = current_user.id
+    @chatroom.save
     redirect_to '/'
   end
 
@@ -39,7 +41,8 @@ class ChatroomsController < ApplicationController
   private
 
   def set
-    @chatroom = Chatroom.find(params[:id])
+    @chatroom = Chatroom.find_by_id(params[:id])
+    redirect_to '/' unless @chatroom
   end
 
   def chatroom_params

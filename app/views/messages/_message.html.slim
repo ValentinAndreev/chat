@@ -1,5 +1,6 @@
 .well
   = image_tag(message.user.avatar, height: '40', class: 'img-circle') if message.user.avatar
   b =< message.user.username
-  | :
-  =< message.text
+  =< message.created_at
+  #message_text
+    =< message.text

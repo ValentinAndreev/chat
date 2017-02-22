@@ -1,3 +1,4 @@
+br/
 h4 All chatrooms
 - @chatrooms.each do |chatroom|
   p
@@ -5,7 +6,10 @@ h4 All chatrooms
     = chatroom.name
     br/
     =< link_to 'Show', chatroom_path(chatroom)
-    =< link_to 'Edit chatroom', edit_chatroom_path(chatroom)
-    =< link_to 'Delete chatroom', chatroom_path(chatroom), method: :delete, data: {confirm: 'Are you sure?'}
-    =< link_to 'Join', chatroom_chatroom_users_path(chatroom), method: :post
-    =< link_to 'Leave', chatroom_chatroom_users_path(chatroom), method: :delete    
+    - if chatroom.user_id == current_user.id
+      =< link_to 'Edit chatroom', edit_chatroom_path(chatroom) 
+      =< link_to 'Delete chatroom', chatroom_path(chatroom), method: :delete, data: {confirm: 'Are you sure?'} 
+    - if joined?(current_user, chatroom)
+      =< link_to 'Leave', chatroom_chatroom_users_path(chatroom), method: :delete
+    - else
+      =< link_to 'Join', chatroom_chatroom_users_path(chatroom), method: :post   

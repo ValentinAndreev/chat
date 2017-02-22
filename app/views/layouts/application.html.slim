@@ -39,14 +39,15 @@ html
                   = link_to 'Sign up', new_user_registration_path                             
       .fluid-container
         .row
-          .col-sm-2[style="position: fixed; top: 70px; left: 0;"]
-            - if current_user          
-              h5 Chatrooms
-              ul
-                - current_user.chatrooms.each do |chatroom|
-                  div id="list-#{chatroom.id}"
-                    li 
-                      = link_to chatroom.name, chatroom 
-              = link_to 'New chatroom', new_chatroom_path
-          .col-sm-10.col-sm-offset-2
+          .col-sm-2[style="position: fixed; top: 100px; left: 0;"]
+            .well
+              - if current_user          
+                h5 Chatrooms
+                ul
+                  - current_user.chatrooms.each do |chatroom|
+                    div id="list-#{chatroom.id}"
+                      li 
+                        => link_to chatroom.name, chatroom                 
+                = link_to 'New chatroom', new_chatroom_path 
+          .col-sm-10.col-sm-offset-1
             = yield
