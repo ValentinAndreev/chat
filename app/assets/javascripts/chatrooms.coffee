@@ -7,3 +7,10 @@ $(document).on "turbolinks:load", ->
     if e && e.keyCode == 13
       e.preventDefault()
       $(this).submit()
+
+  $("#new_message").on "submit", (e) ->
+    e.preventDefault()
+    chatroom_id = $("active").data("chatroom")
+    text = $("#text_field").val()
+    App.chatroom.send_message(chatroom_id, text)
+    $("#text_field").val("")
