@@ -5,12 +5,12 @@ class ChatroomUsersController < ApplicationController
 
   def create
     @chatroom_user = @chatroom.chatroom_users.where(user_id: current_user.id).first_or_create
-    redirect_to @chatroom
+    redirect_to @chatroom, notice: 'You joined to charoom.'
   end
 
   def destroy
     @chatroom_user = @chatroom.chatroom_users.where(user_id: current_user.id).destroy_all
-    redirect_to '/'
+    redirect_to '/', notice: 'You leaved the chatroom.'
   end
 
   private

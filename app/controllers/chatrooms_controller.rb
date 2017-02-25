@@ -21,21 +21,24 @@ class ChatroomsController < ApplicationController
 
   def update
     @chatroom.update_attributes!(chatroom_params)
-    redirect_to '/'
+    redirect_to '/', notice: 'Name of chatroom was changed.'
   end
 
   def create
     @chatroom = Chatroom.new(chatroom_params)
     @chatroom.user_id = current_user.id
-    @chatroom.save
-    redirect_to '/'
+    if @chatroom.save 
+      redirect_to '/', notice: 'Chatroom was created.'
+    else
+      render 'new'
+    end
   end
 
   def destroy
     @chatroom.chatroom_users.destroy_all
     @chatroom.messages.destroy_all
     @chatroom.destroy
-    redirect_to '/'
+    redirect_to '/', notice: 'Chatroom was deleted.'
   end
 
   private
