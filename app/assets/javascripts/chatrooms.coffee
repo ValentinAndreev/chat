@@ -3,10 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 $(document).on "turbolinks:load", ->
+  $("body, html").animate({scrollTop: $(document).height()}, 400)
   $("#new_message").on "keypress", (e) ->
     if e && e.keyCode == 13
       e.preventDefault()
-      $(this).submit()
+      $(this).submit()       
 
   $("#new_message").on "submit", (e) ->
     e.preventDefault()

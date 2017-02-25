@@ -1,9 +1,15 @@
 br/
 h4 All chatrooms
 - @chatrooms.each do |chatroom|
-  p
-    b Chatroom 
-    = chatroom.name
+  .well 
+    div id="chatroom-#{chatroom.id}"
+      => image_tag(owner(chatroom).avatar, height: '40', class: 'img-circle') if owner(chatroom).avatar
+      b Chatroom:
+      - if joined?(current_user, chatroom)
+        =< link_to chatroom.name, chatroom_path(chatroom)
+      - else
+        = chatroom.name
+      =< "(#{pluralize(messages(chatroom), 'message')})"
     br/
     =< link_to 'Show', chatroom_path(chatroom)
     - if chatroom.user_id == current_user.id

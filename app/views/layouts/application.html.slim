@@ -40,14 +40,18 @@ html
       .fluid-container
         .row
           .col-sm-2[style="position: fixed; top: 100px; left: 0;"]
-            .well
-              - if current_user          
-                h5 Chatrooms
-                ul
-                  - current_user.chatrooms.each do |chatroom|
-                    div id="list-#{chatroom.id}"
-                      li 
-                        => link_to chatroom.name, chatroom                 
+            - if current_user
+              h4 = @chatroom.name if @chatroom
+              p
+                b Joined chatrooms:
+              .well
+                - current_user.chatrooms.each do |chatroom|
+                  div id="list-#{chatroom.id}"
+                    = image_tag(owner(chatroom).avatar, height: '30', class: 'img-circle') if owner(chatroom).avatar
+                    =< link_to chatroom.name, chatroom
+                    =< "(#{pluralize(messages(chatroom), 'message')})"
+                  notice[data-chatroom=chatroom.id]
+                  hr/
                 = link_to 'New chatroom', new_chatroom_path 
           .col-sm-10.col-sm-offset-1
             = yield

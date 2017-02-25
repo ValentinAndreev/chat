@@ -1,7 +1,7 @@
 br/
-h4 = @chatroom.name
 active[data-chatroom=@chatroom.id]
   = render @messages
-= simple_form_for [@chatroom, @message] do |f|
-  = f.text_field :text, class: "form-control", id: 'text_field', autofocus: true
+- if joined?(current_user, @chatroom)
+  = simple_form_for [@chatroom, @message] do |f|
+    = f.text_field :text, class: "form-control", id: 'text_field', autofocus: true
 = link_to 'Back', root_path

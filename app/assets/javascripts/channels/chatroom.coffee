@@ -8,10 +8,16 @@ App.chatroom = App.cable.subscriptions.create "ChatroomChannel",
   received: (data) ->
     active_chatroom = $("active[data-chatroom='#{data.chatroom_id}']")
     if active_chatroom.length > 0
-      $("active").append(data.message)
+      $(active_chatroom).append(data.message)
       $("#text_field").val("")
+      $("body, html").animate({scrollTop: $(document).height()}, 400)
     else
-      $("#list-#{data.chatroom_id}").css("font-weight", "bold")
+      $("notice[data-chatroom='#{data.chatroom_id}']").empty()
+      $("notice[data-chatroom='#{data.chatroom_id}']").append(" New messages!")
+      blink = ->
+        $("notice[data-chatroom='#{data.chatroom_id}']").fadeOut('slow').fadeIn('slow')
+        setTimeout blink, 100
+      blink()
 
   send_message: (chatroom_id, message) ->
     @perform "send_message", {chatroom_id: chatroom_id, text: message}
