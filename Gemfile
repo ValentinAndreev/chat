@@ -37,11 +37,14 @@ gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'better_errors'
+  gem 'binding_of_caller'
   gem 'byebug', platform: :mri
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
+
   gem 'listen', '~> 3.0.5'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
@@ -49,11 +52,19 @@ group :development do
   gem 'spring-watcher-listen', '~> 2.0.0'
 end
 
+group :test do
+  gem 'capybara'
+  gem 'database_cleaner'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'launchy'
+  gem 'phantomjs', require: 'phantomjs/poltergeist'
+  gem 'poltergeist'
+end
+
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'better_errors'
-gem 'binding_of_caller'
 gem 'bootstrap-sass'
 gem 'carrierwave'
 gem 'devise'
