@@ -7,4 +7,4 @@ Use gorails screencast https://gorails.com/episodes/group-chat-with-actioncable-
 Learning to use:
 * Action Cable, Action Job.
 * More JS and ajax with testing (PhantomJS/Capybara).
-* Other: gem 'binding_of_caller' (development), gem 'devise' (authentification).
+* Other: gem 'binding_of_caller' (development), gem 'devise' (authentification), gem 'redis' (for ActionCable), gem 'carrierwave' with gem 'fog-aws' for Amazon S3 as image storage.
