@@ -1,5 +1,5 @@
 
-Chat.
+# Chat.
 
 * Build on Ruby 2.4.0 and Rails 5.0.1 with PostgeSQL 9.5.
 
